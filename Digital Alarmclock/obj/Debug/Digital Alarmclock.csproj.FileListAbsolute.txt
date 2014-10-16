@@ -1,1 +1,6 @@
 C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\bin\Debug\Digital Alarmclock.exe.config
+C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\obj\Debug\Digital Alarmclock.csprojResolveAssemblyReference.cache
+C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\bin\Debug\Digital Alarmclock.exe
+C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\bin\Debug\Digital Alarmclock.pdb
+C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\obj\Debug\Digital Alarmclock.exe
+C:\Users\Carolina\Documents\GitHub\1DV402-Labbar\2-2-A\Digital Alarmclock\obj\Debug\Digital Alarmclock.pdb
