@@ -8,139 +8,82 @@ namespace Digital_Alarmclock
 {
     class Program
     {
-        private static string horizontalLine;
-
-        public string HorizontalLine
-        {
-            get { return horizontalLine; }
-            set
-            {
-                horizontalLine = "════════════════════════════════════════";
-            }
-        }
+        private static string horizontalLine = "_______________________________";
 
         //Metoden ska instansiera objekt av klassen AlarmClock och testa konstruktorerna, egenskaperna och 
         //metoderna.
         static void Main(string[] args)
         {
-            AlarmClock ac = new AlarmClock(10, 15, 10, 30);
-
-            AlarmClock clock = new AlarmClock();
-            ViewTestHeader("Test 1. Test av standardkonstruktorn.");
-            string time = clock.ToString();
-            Console.WriteLine(time);
+            AlarmClock firstClock = new AlarmClock();
+            ViewTestHeader("Test 1.\n Test av standardkonstruktorn.");
+            Console.WriteLine(firstClock.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(Program.horizontalLine);
             Console.ResetColor();
             Console.WriteLine();
 
             AlarmClock secondClock = new AlarmClock(9, 42);
-            ViewTestHeader("Test 2. Test av konstruktorn med två parametrar (9, 42).");
-            string secondTime = secondClock.ToString();
-            Console.Write(secondTime);
+            ViewTestHeader("Test 2.\n Test av konstruktorn med två parametrar (9, 42).");
+            Console.WriteLine(secondClock.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(Program.horizontalLine);
             Console.ResetColor();
             Console.WriteLine();
 
             AlarmClock thirdClock = new AlarmClock(13, 24, 7, 35);
-            ViewTestHeader("Test 3. Test av konstruktorn med fyra parametrar (13, 24, 7, 35).");
-            string thirdTime = thirdClock.ToString();
-            Console.WriteLine(thirdTime);
+            ViewTestHeader("Test 3.\n Test av konstruktorn med fyra parametrar (13, 24, 7, 35).");
+            Console.WriteLine(thirdClock.ToString());
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(Program.horizontalLine);
             Console.ResetColor();
             Console.WriteLine();
 
-            AlarmClock fourthClock = new AlarmClock(23, 58, 0, 11);
-            ViewTestHeader("Test 4. Låt larmet gå efter 13 minuter.");
-            for (int i = 0; i < 15; i++)
+            ViewTestHeader("Test 4.\n Låt larmet gå efter 13 minuter.");
+            thirdClock.AlarmHour = 13;
+            thirdClock.AlarmMinute = 37;
+            Run(thirdClock, 14);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(Program.horizontalLine);
+            Console.ResetColor();
+
+           
+            ViewTestHeader("Test 5.\n Låt larmet gå efter 6 minuter.");
+            thirdClock.AlarmHour = 13;
+            thirdClock.AlarmMinute = 44;
+            Run(thirdClock, 7);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(Program.horizontalLine);
+            Console.ResetColor();
+
+
+            AlarmClock sixthClock = new AlarmClock();
+            ViewTestHeader("Test 6.\n Test av egenskaperna så att undantag kastas\ndå tid och alarmtid tilldelas felaktiga värden.");
+             try
             {
-                if (fourthClock.TickTock() == true)
-                {
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    string fourthTime = fourthClock.ToString();
-                    Console.Write(fourthTime);
-                    Console.WriteLine("BEEP! BEEP! BEEP!");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    string fourthTime = fourthClock.ToString();
-                    Console.WriteLine(fourthTime);
-                }
+                 sixthClock.Hour = 100;
             }
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(Program.horizontalLine);
-            Console.ResetColor();
-
-            AlarmClock fifthClock = new AlarmClock(6, 12, 6, 15);
-            ViewTestHeader("Test 5. Låt larmet gå efter 6 minuter.");
-            for (int i = 0; i < 6; i++)
+            catch (ArgumentException ex)
             {
-                if (fifthClock.TickTock() == true)
-                {
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    string fifthTime = fifthClock.ToString();
-                    Console.Write(fifthTime);
-                    Console.WriteLine("BEEP! BEEP! BEEP!");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    string fifthTime = fifthClock.ToString();
-                    Console.WriteLine(fifthTime);
-                }
+                ViewErrorMessage(ex.Message);
             }
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(Program.horizontalLine);
-            Console.ResetColor();
+             Console.ForegroundColor = ConsoleColor.Blue;
+             Console.WriteLine(Program.horizontalLine);
+             Console.ResetColor();
 
-            //AlarmClock sixthClock = new AlarmClock(44, 60, 25, 81);
-            //ViewTestHeader("Test 6. Test av egenskaperna så att undantag kastas då tid och alarmtid tilldelas felaktiga värden.");
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    if (sixthClock.TickTock() == true)
-            //    {
-            //        Console.BackgroundColor = ConsoleColor.Blue;
-            //        Console.ForegroundColor = ConsoleColor.White;
-            //        string sixthTime = sixthClock.ToString();
-            //        Console.Write(sixthTime);
-            //        Console.WriteLine("BEEP! BEEP! BEEP!");
-            //        Console.ResetColor();
-            //    }
-            //    else
-            //    {
-            //        string sixthTime = sixthClock.ToString();
-            //        Console.WriteLine(sixthTime);
-            //    }
-            //}
 
-            //AlarmClock seventhClock = new AlarmClock(44, 60, 25, 81);
-            //ViewTestHeader("Test 7. Test av konstruktorer så att undantag kastas då tid och alarmtid tilldelas felaktiga värden.");
-            //string seventhTime = seventhClock.ToString();
-            //Console.WriteLine(seventhTime);
-            //Console.WriteLine();
-            //Console.ForegroundColor = ConsoleColor.Blue;
-            //Console.WriteLine(Program.horizontalLine);
-            //Console.ResetColor();
-
-            //Man kan självklart dela upp detta i återanvändningsbara funktioner, men prova först 
-            //att få koden att fungera utan detta. Därefter se om du kan göra koden mer 
-            //återanvändningsbar med att göra en funktion som gör mycket jobbet för dig.
-
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(Program.horizontalLine);
-            Console.ResetColor();
-            Console.WriteLine("AlarmClock");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(Program.horizontalLine);
-            Console.ResetColor();
-            Console.WriteLine();
-            Program.Run(ac, 20);
+             AlarmClock seventhClock = new AlarmClock();
+             ViewTestHeader("Test 7.\n Test av konstruktorer så att undantag kastas \ndå tid och alarmtid tilldelas felaktiga värden.");
+             try
+             {
+                 seventhClock.AlarmMinute = 100;
+             }
+             catch (ArgumentException ex)
+             {
+                 ViewErrorMessage(ex.Message);
+             }
+             Console.ForegroundColor = ConsoleColor.Blue;
+             Console.WriteLine(Program.horizontalLine);
+             Console.ResetColor();
         }
 
         //Privat statisk metod som har två parametrar.
@@ -155,23 +98,24 @@ namespace Digital_Alarmclock
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
                     Console.ForegroundColor = ConsoleColor.White;
-                    string acTime = ac.ToString();
-                    Console.Write(acTime);
+                    Console.Write(ac);
                     Console.WriteLine("BEEP! BEEP! BEEP!");
                     Console.ResetColor();
                 }
                 else
                 {
-                    string acTime = ac.ToString();
-                    Console.WriteLine(acTime);
+                    Console.WriteLine(ac);
                 }
             }
         }
 
         //Privat statisk metoden som tar ett felmeddelande som argument och presenterar det.
-        private void ViewErrorMessage(string message)
+        private static void ViewErrorMessage(string message)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
+            Console.ResetColor();
         }
 
         //Privat statisk metod som tar en sträng som argument och presenterar strängen.
@@ -192,3 +136,44 @@ namespace Digital_Alarmclock
 //fourthClock.AlarmHour = int.Parse(Console.ReadLine());
 //Console.WriteLine("Ange minuten för larmet: ");
 //fourthClock.AlarmMinute = int.Parse(Console.ReadLine());
+
+
+
+
+// 2.2B    samma men färre klasser? 
+ //catch (Exception ex)
+ //           {
+ //               ViewErrorMessage(ex.Message);
+ //           }
+//'och sedan
+//[20:53:53] Julia Källberg:         private static void ViewErrorMessage(string message)
+//        {
+//            Console.BackgroundColor = ConsoleColor.Red;
+//            Console.ForegroundColor = ConsoleColor.White;
+//            Console.WriteLine(message);
+//            Console.ResetColor();
+//        }
+//och själkva felmeddelandet
+//[20:54:17] Julia Källberg: 
+//        public int Number
+//        {
+//            get { return _number; }
+//            set
+//            {
+//                if (value >= 0 && value <= MaxNumber) //Om värdet som ska tilldelas _number är i det slutna intervallet mellan 0 och maxvärdet
+//                {
+//                    _number = value;
+//                }
+//                else
+//                {
+//                    throw new ArgumentException("Värdet är inte i rätt intervall"); //Kastar undantag om värdet som ska tilldelas _number INTE är i det slutna intervallet mellan 0 och maxvärdet
+//                }
+//            }
+//        }
+//[20:54:24] Julia Källberg: i NumberDisplay
+
+
+//try{ int nummer = int.Parse(variabel) } catch { *kod som säger att variabel inte kunde vara int* }
+//[21:00:09] Julia Källberg: jo men precis, skriv en try-catch-sats i test 6 och 7
+
+//Om ni kastar ArgumentOutOfRange, då finns inte .Message, men ni kan använda ex.ParamName istället. Bara lite tips.

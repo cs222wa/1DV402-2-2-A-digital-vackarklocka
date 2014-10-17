@@ -24,7 +24,7 @@ namespace Digital_Alarmclock
             {
                 if (0 > value || value > 23)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Värdet för alarm-timmen är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 23.");
                 }
                 _alarmHour = value;
             }
@@ -40,7 +40,7 @@ namespace Digital_Alarmclock
             {
                 if (0 > value || value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Värdet för alarm-minuten är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 59.");
                 }
                 _alarmMinute = value;
             }
@@ -56,7 +56,7 @@ namespace Digital_Alarmclock
             {
                 if (0 > value || value > 23)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Värdet för klockans timme är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 23.");
                 }
                 _hour = value;
             }
@@ -73,7 +73,7 @@ namespace Digital_Alarmclock
             {
                 if (0 > value || value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Värdet för klockans minut är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 59.");
                 }
                 _minute = value;
             }
@@ -150,9 +150,8 @@ namespace Digital_Alarmclock
         //inledas med 0. Är klocka fem över elva på kvällen ska tiden presenteras som 23:05. Är tiden åtta 
         //minuter över sju på morgonen ska tiden presenteras som 7:08. 
 
-        public string ToString()
+        public override string ToString()
         {
-            //string currentTime = DateTime.Now.ToString("HH:mm");
             return String.Format("{0}:{1:d2} ({2}:{3:d2})", Hour, Minute, AlarmHour, AlarmMinute);
         }
     }
