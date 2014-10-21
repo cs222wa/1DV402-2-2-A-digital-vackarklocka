@@ -22,7 +22,7 @@ namespace Digital_Alarmclock
             get { return _alarmHour; }
             set
             {
-                if (0 > value || value > 23)
+                if (0 > value || value > 23)  //Om inte värdet är mellan 0 eller 23 så kastas ett undantag med tillhörande meddelande.
                 {
                     throw new ArgumentException("Värdet för alarm-timmen är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 23.");
                 }
@@ -38,7 +38,7 @@ namespace Digital_Alarmclock
             get { return _alarmMinute; }
             set
             {
-                if (0 > value || value > 59)
+                if (0 > value || value > 59) //Om inte värdet är mellan 0 eller 59 så kastas ett undantag med tillhörande meddelande.
                 {
                     throw new ArgumentException("Värdet för alarm-minuten är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 59.");
                 }
@@ -54,7 +54,7 @@ namespace Digital_Alarmclock
             get { return _hour; }
             set
             {
-                if (0 > value || value > 23)
+                if (0 > value || value > 23) //Om inte värdet är mellan 0 eller 23 så kastas ett undantag med tillhörande meddelande.
                 {
                     throw new ArgumentException("Värdet för klockans timme är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 23.");
                 }
@@ -71,7 +71,7 @@ namespace Digital_Alarmclock
             get { return _minute; }
             set
             {
-                if (0 > value || value > 59)
+                if (0 > value || value > 59)  //Om inte värdet är mellan 0 eller 59 så kastas ett undantag med tillhörande meddelande.
                 {
                     throw new ArgumentException("Värdet för klockans minut är inte i rätt intervall.\n Var god ange ett värde mellan 0 och 59.");
                 }
@@ -120,28 +120,28 @@ namespace Digital_Alarmclock
         //1. Värdet för timmarna måste vara i det slutna intervallet mellan 0 och 23.
         public bool TickTock()
         {
-            if (Minute < 59)
+            if (Minute < 59) //Om värdet för minuten är under 59 så ska det plussas på en minut för varje loop.
             {
                 Minute++;
             }
             else
             {
-                Minute = 0;
+                Minute = 0; //Om värdet för minuten är över 59 så ska det sättas till 0 och en timme ska plussas på.
                 if (Hour < 23)
                 {
-                    Hour++;
+                    Hour++;  //Om värdet för timmen är under 23 så ska det plussas på en timme för varje loop.
                 }
                 else
                 {
-                    Hour = 0;
+                    Hour = 0;//Om värdet för timmen är över 23 ska timmen sättas till 0.
                 }
             }
 
             if (AlarmHour == Hour && AlarmMinute == Minute)
             {
-                return true;
+                return true; //Om Alarm-tiden är samma som klockans tid ska metoden returnera värdet true.
             }
-            return false;                                               //Om inte kraven uppfylls returnerar metoden värdet false.
+            return false;   //Om inte kraven uppfylls returnerar metoden värdet false.
         }
 
         //Publik metod som har som uppgift att returnera en sträng representerande värdet av en instans av 
@@ -152,40 +152,7 @@ namespace Digital_Alarmclock
 
         public override string ToString()
         {
-            return String.Format("{0}:{1:d2} ({2}:{3:d2})", Hour, Minute, AlarmHour, AlarmMinute);
+            return String.Format("{0}:{1:d2} ({2}:{3:d2})", Hour, Minute, AlarmHour, AlarmMinute);  //Klockan och larmets tider skrivs ut som en sträng.
         }
     }
 }
-
-//NOTES
-//Console.WriteLine("Minutes?");                Konsolen begär minuter utav användaren.
-//    string minutes = Console.ReadLine();      Läser in minuter
-//    int mins = int.Parse(minutes);            String mins ändras till int minutes.
-//    
-//        // Write line.                        Vid varje minut skrivs ett meddelande ut.
-//        Console.WriteLine(new string('X', 30));
-
-// Larmet piper 10 gånger
-////for (int i = 0; i < 10; i++)
-//    {
-//        Console.Beep();
-//    }
-
-
-//while (current_time != alarm_time) {    när nuvarande tid är samma som larmtiden - sound alarm.
-//    sleep(60);
-//}
-//sound_alarm();
-
-
-//Let's say that I have a method in my application, and I want this method to be called 
-//every hour on the hour (e.g. at 7:00 PM, 8:00 PM, 9:00 PM etc.). 
-//I could create a Timer and set its Interval to 3600000, but eventually this would drift out of sync with the system clock. 
-//Or I could use a while() loop with Thread.Sleep(n) to periodically check the system time 
-//and call the method when the desired time is reached, 
-
-
-//If (Format(DateTime.Now, "hh:mm") = Format(AlarmTime.Value, "hh:mm"))
-
-//DateTime.Now.ToString("HH:mm:ss tt");
-//this gives it to you as a string.
